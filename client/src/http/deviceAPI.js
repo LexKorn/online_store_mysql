@@ -37,11 +37,31 @@ export const createDevice = async (device) => {
     return data;
 };
 
-export const fetchDevices = async (typeId, brandId, page, limit = 4) => {
-    const {data} = await $host.get('api/device', {body: {
-        typeId, brandId, page, limit
-    }});
-    return data;
+export const fetchDevices = async (typeId, brandId, page, limit) => {
+    page = page || 1;
+    limit = limit || 8;
+
+    if (!brandId && !typeId) {
+        let {data} = await $host.get(`api/device`, {query: {
+            typeId, brandId, page, limit
+        }});
+        return data;
+    }
+
+    if (brandId && !typeId) {
+        let {data} = await $host.get(`api/device?brandId=${brandId}`);
+        return data;
+    }
+
+    if (!brandId && typeId) {
+        let {data} = await $host.get(`api/device?typeId=${typeId}`);
+        return data;
+    }
+
+    if (brandId && typeId) {
+        let {data} = await $host.get(`api/device?typeId=${typeId}&brandId=${brandId}`);
+        return data;
+    }
 };
 
 export const fetchOneDevice = async (id) => {

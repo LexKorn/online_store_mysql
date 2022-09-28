@@ -1,13 +1,16 @@
 import React, {useEffect, useContext} from 'react';
 import {observer} from 'mobx-react-lite';
 import {Button, Card, Col, Container, Row} from 'react-bootstrap';
+import {useHistory} from 'react-router-dom';
 
 import {Context} from '../index';
 import { getBasket, deleteFromBasket } from '../http/basketAPI';
+import { DEVICE_ROUTE } from '../utils/consts';
 
 
 const BasketPage = observer(() => {
     const {basket} = useContext(Context);
+    const history = useHistory();
 
     useEffect(() => {
         getBasket().then(data => basket.setBaskets(data));
@@ -39,7 +42,9 @@ const BasketPage = observer(() => {
             {basket.basket.map(product =>
                 <Card className="d-flex w-100 p-2 justify-content-center mb-2" key={product.id}>
                     <Row className="d-flex w-100">
-                        <Col md={7}>
+                        <Col md={7} 
+                            onClick={() => history.push(DEVICE_ROUTE + '/' + product.device.id)}
+                            style={{cursor: 'pointer'}}>
                             <div className="d-flex flex-row align-items-center">
                                 <img src={process.env.REACT_APP_API_URL + product.device.img} width={50} />
                                 <h2 className="ps-3">{product.device.name}</h2>
