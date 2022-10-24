@@ -7,6 +7,8 @@ import { fetchOneDevice, fetchBrands } from '../http/deviceAPI';
 import { addToBasket } from '../http/basketAPI';
 import {Context} from '../index';
 
+import './devicePage.sass';
+
 
 const DevicePage = () => {
     const [device, setDevice] = useState({info: []});
@@ -35,25 +37,23 @@ const DevicePage = () => {
 
     return (
         <Container className="mt-3">
-            <Row>
+            <Row className="device">
                 <Col md={4}>
-                    <Image width={300} height={300} style={{objectFit:'contain'}} src={process.env.REACT_APP_API_URL + device.img} />
+                    <Image className="device__img" src={process.env.REACT_APP_API_URL + device.img} />
                 </Col>
                 <Col md={4}>
-                    <Row  className="d-flex justify-content-center align-items-center">
-                        <h2 style={{'textAlign': 'center'}}>{device.name}</h2>
-                        <h2 style={{'textAlign': 'center'}}>{brand[0].name}</h2>
+                    <Row  className="d-flex justify-content-center align-items-center device__center">
+                        <h2 className="device__center__text">{device.name}</h2>
+                        <h2 className="device__center__text">{brand[0].name}</h2>
                         <div 
-                            className="d-flex align-items-center justify-content-center"
-                            style={{background: `url(${bigStar}) no-repeat center center`, width:240, height:240, backgroundSize: 'cover', fontSize:60}}>
+                            className="d-flex align-items-center justify-content-center device__star">
                             {device.rating}
                         </div>
                     </Row>
                 </Col>
                 <Col md={4}>
                     <Card
-                        className="d-flex flex-column align-items-center justify-content-around"
-                        style={{width: 300, height: 300, fontSize: 32, border: '5px solid lightgray'}}>
+                        className="d-flex flex-column align-items-center justify-content-around device__card">
                         <h3>От: {device.price} руб.</h3>
                         <Button variant={"outline-dark"} onClick={addDivToBask} >Добавить в корзину</Button>
                     </Card>

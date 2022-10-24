@@ -4,27 +4,27 @@ import {Card} from 'react-bootstrap';
 
 import {Context} from '../index';
 
+import './brandBar.sass';
+
 
 const BrandBar = observer(() => {
     const {device} = useContext(Context);
 
     return (
-        <div className="d-flex">
+        <div className="brand-bar">
             <Card 
-                className="p-3 ms-3 mt-3"
+                className="brand-bar__card"
                 onClick={() => device.setSelectedBrand({})}
                 border="light"
-                style={{cursor: 'pointer'}}>
-                All                
+                >All                
             </Card>
             {device.brands.map(brand => 
                 <Card 
                     key={brand.id} 
-                    className="p-3 ms-3 mt-3"
+                    className="brand-bar__card"
                     onClick={() => device.setSelectedBrand(brand)}
                     border={brand.id === device.selectedBrand.id ? 'danger' : 'light'}
-                    style={{cursor: 'pointer'}}>
-                    {brand.name}
+                    >{brand.name}
                 </Card>
             )}
         </div>

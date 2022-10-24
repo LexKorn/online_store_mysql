@@ -1,0 +1,13 @@
+.device-list
+    display: flex
+
+@media (max-width: 991px)
+    .device-list
+        display: grid
+        grid-template-columns: repeat(auto-fit, 150px)
+        justify-content: space-around
+        column-gap: 30px
+
+@media (max-width: 630px)
+    .device-list
+        justify-content: unset

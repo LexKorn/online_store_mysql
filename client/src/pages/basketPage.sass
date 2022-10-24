@@ -1,0 +1,25 @@
+.basket__device
+    cursor: pointer
+    
+@media (max-width: 991px)
+    .basket
+        &__text
+            font-size: 24px
+
+@media (max-width: 767px)
+    .basket
+        &__device, &__price, &__btn
+            width: unset
+        &__text
+            font-size: 18px
+        &__row
+            align-items: end
+            justify-content: space-between
+
+@media (max-width: 575px)
+    .basket
+        &__page
+            flex-direction: column
+        &__row
+            flex-direction: column
+            align-items: center

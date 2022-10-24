@@ -7,6 +7,8 @@ import {Context} from '../index';
 import { getBasket, deleteFromBasket } from '../http/basketAPI';
 import { DEVICE_ROUTE } from '../utils/consts';
 
+import './basketPage.sass';
+
 
 const BasketPage = observer(() => {
     const {basket} = useContext(Context);
@@ -29,7 +31,7 @@ const BasketPage = observer(() => {
     )}
 
     return (
-        <Container className="d-flex flex-sm-column justify-content-center align-items-center mt-3">
+        <Container className="d-flex flex-sm-column justify-content-center align-items-center mt-3 basket__page">
             <h2 className="pb-2">Корзина</h2>
             <Card 
                 className="d-flex flex-row  p-2 justify-content-between align-items-center mb-2"
@@ -40,22 +42,22 @@ const BasketPage = observer(() => {
             </Card>
 
             {basket.basket.map(product =>
-                <Card className="d-flex w-100 p-2 justify-content-center mb-2" key={product.id}>
-                    <Row className="d-flex w-100">
+                <Card className="d-flex w-100 p-2 justify-content-center mb-2 basket" key={product.id}>
+                    <Row className="d-flex w-100 basket__row">
                         <Col md={7} 
                             onClick={() => history.push(DEVICE_ROUTE + '/' + product.device.id)}
-                            style={{cursor: 'pointer'}}>
+                            className="basket__device">
                             <div className="d-flex flex-row align-items-center">
                                 <img src={process.env.REACT_APP_API_URL + product.device.img} width={50} />
-                                <h2 className="ps-3">{product.device.name}</h2>
+                                <h2 className="ps-3 basket__text">{product.device.name}</h2>
                             </div>
                         </Col>
-                        <Col md={3}>
+                        <Col md={3} className="basket__price">
                             <div className="d-flex h-100 flex-row justify-content-end align-items-center">
-                                <h2 className="font-weight-light">{product.device.price} руб.</h2>
+                                <h2 className="font-weight-light basket__text">{product.device.price} руб.</h2>
                             </div>
                         </Col>
-                        <Col md={2} className="d-flex justify-content-end align-items-center">
+                        <Col md={2} className="d-flex justify-content-end align-items-center basket__btn">
                             <Button 
                                 variant={"outline-danger"}
                                 onClick={() => removeProduct(product.id)}

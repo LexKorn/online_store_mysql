@@ -5,12 +5,14 @@ import {Row} from 'react-bootstrap';
 import { Context } from '../index';
 import DeviceItem from './DeviceItem';
 
+import './deviceList.sass';
+
 
 const DeviceList = observer(() => {
     const {device} = useContext(Context);
 
     return (
-        <Row className='d-flex'>
+        <Row className='device-list'>
             {device.devices.map(device =>
                 <DeviceItem key={device.id} device={device} />
             )}
